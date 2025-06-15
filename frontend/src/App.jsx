@@ -1,4 +1,5 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -6,8 +7,7 @@ function App() {
 
     return (
         <div>
-        <p>Hello! Welcome to the Hebrew Tutor.</p>
-        <Navbar />
+            <Navbar />
         </div>
     );
 }
