@@ -6,7 +6,7 @@ function Navbar() {
         <nav>
             <div className="logo">Fluid</div>
             <ul style={{ display: 'flex', listStyle: 'none' }}>
-                <li><NavLink to="/">Playground</NavLink></li>
+                <li><NavLink to="/playground">Playground</NavLink></li>
                 <li><NavLink to="/about">About Us</NavLink></li>
             </ul>
         </nav>

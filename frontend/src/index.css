@@ -38,3 +38,18 @@ nav a:hover {
   font-size: 24px;
   font-weight: bold;
 }
+
+.playground_header {
+  font-size: 24px;
+  text-align: center;
+  color:#6aafee;
+
+
+}
+
+.playground_header_2 {
+  font-size: 20px;
+  text-align: left;
+  color:#1b4c7b;
+
+}
