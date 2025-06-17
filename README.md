@@ -1,4 +1,4 @@
-## Hebrew Learners - Welcome to FLuid ##
+## Hebrew Learners - Welcome to Fluid! ##
 
 Fluiad is an app which offers a gamified, active learning approach to mastering Hebrew, with a focus on verb conjugation and sentence composition.
 
