@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import StartVerb from "../components/StartVerb.jsx";
 
@@ -18,6 +18,8 @@ const pronouns = [
 ];
 
 function Playground() {
+    const [combo, setCombo] = useState(null);
+
     return (
 
     <div>
@@ -30,8 +32,8 @@ function Playground() {
         <h4 className='playground_header_2'> מוכן, press start</h4>
       
      
-        <StartVerb/>
-        
+     <StartVerb combo={combo} setCombo={setCombo} />
+
        
 
      </div>

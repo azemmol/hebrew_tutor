@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import getRandomVerbCombo from './Randomizer.js';
 
 
-function StartVerb() {
-    const [combo,setCombo] = useState(null);
+function StartVerb({ combo, setCombo }) {
     const handleClick = () => {
         const combo_chadash = getRandomVerbCombo();
         setCombo(combo_chadash);
