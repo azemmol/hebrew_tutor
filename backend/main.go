@@ -1,11 +1,11 @@
 package main
 
 import (
-	"net/http"
-	"fmt"
-	"fluid_hubrew/handlers"
-	"log"
-	
+    "net/http"
+    "fmt"
+    "log"
+
+    "github.com/azemmol/hebrew-tutor/backend/handlers"
 )
 
 
