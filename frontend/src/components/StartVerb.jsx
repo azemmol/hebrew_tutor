@@ -7,7 +7,6 @@ function StartVerb({ combo, setCombo }) {
     const handleClick = () => {
         const combo_chadash = getRandomVerbCombo();
         setCombo(combo_chadash);
-        console.log(combo_chadash); 
     };
     return (
         <div>

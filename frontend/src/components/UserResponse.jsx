@@ -18,16 +18,19 @@ function Response({ combo }) {
             },
             body: JSON.stringify(sentence_data)
         });
+        console.log(sentence_data)
+       
 
         const data = await res.json();
         console.log("OpenAI says:", data); 
+        setResponse("");
       
     }
 
 
     return (
         <div>
-            <form onSubmit={handleSubmission}>
+            {combo && <form onSubmit={handleSubmission}>
             <input
                 type="text"
                 value={response}
@@ -36,6 +39,7 @@ function Response({ combo }) {
             <button type='submit'>Submit!</button>
 
             </form>
+        }
             
         </div>
     )
