@@ -7,7 +7,7 @@ import Playground from './pages/Playground.jsx'
 
 
 function App() {
-     console.log("App loaded");
+    
     return (
         <div>
             <Navbar />

@@ -21,8 +21,15 @@ function Playground() {
     return (
 
     <div>
-        <h1 className='playground_header'> Welcome to the playground!</h1>
-        <h4 className='playground_header_2'> To begin, press start</h4>
+        <h1 className='playground_header'> Welcome to Playground!</h1>
+        <br></br> <br></br>
+        <div className="playground_header_2">
+            <p>Click "Start" to receive a sentence prompt. Your answer will be checked for accuracy.</p>
+
+        </div>
+        <h4 className='playground_header_2'> מוכן, press start</h4>
+      
+     
         <StartVerb/>
         
        
