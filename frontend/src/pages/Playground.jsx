@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import StartVerb from "../components/StartVerb.jsx";
 
 const verbs = ["להשתפר","לעדכן","להצטרף","להתמודד","להעדיף"]
 const tense = ["עבר", "הווה", "עתיד"]
@@ -22,7 +23,9 @@ function Playground() {
     <div>
         <h1 className='playground_header'> Welcome to the playground!</h1>
         <h4 className='playground_header_2'> To begin, press start</h4>
-         <button>Start</button>
+        <StartVerb/>
+        
+       
 
      </div>
     
