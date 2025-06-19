@@ -49,15 +49,15 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
     log.Printf("Received sentence: %s", req.Sentence)
 
     // Dummy feedback response
-    response := map[string]string{
-    "feedback": fmt.Sprintf("Sentence received! Looks good. You wrote: %s", req.Sentence),
-}
+//     response := map[string]string{
+//     "feedback": fmt.Sprintf("Sentence received! Looks good. You wrote: %s", req.Sentence),
+// }
 	// jsonData, err := json.Marshal(req) //Try to convert the req struct into JSON.
 	if err != nil {
 		log.Fatal(err)
 	}
 	client := openai.NewClient(os.Getenv("API_KEY"))
-	systemPrompt := "You are a Hebrew tutor. Evaluate grammar and conjugation only. Also give a naturals sounding similar sentence"
+	systemPrompt := "You are a consice Hebrew tutor. Evaluate grammar and conjugation only.include nekudot when giving feedback on the verb - right or wrong; Also give a naturals sounding similar sentence"
 	userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
 	req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
 
@@ -84,9 +84,13 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println("Feedback from OpenAI:", resp.Choices[0].Message.Content)
 
+	user_feedback := map[string]string{
+    "feedback": resp.Choices[0].Message.Content,
+	}
+
 
 
     w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(response)
+    json.NewEncoder(w).Encode(user_feedback)
 
 }
