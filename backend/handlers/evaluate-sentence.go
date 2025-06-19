@@ -56,7 +56,7 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	client := openai.NewClient(os.Getenv("OPEN_API_KEY"))
+	client := openai.NewClient(os.Getenv("API_KEY"))
 	systemPrompt := "You are a Hebrew tutor. Evaluate grammar and conjugation only. Also give a naturals sounding similar sentence"
 	userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
 	req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
