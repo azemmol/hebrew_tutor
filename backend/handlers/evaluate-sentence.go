@@ -1,13 +1,17 @@
 package handlers
 
 import (
-    "encoding/json"
-    "log"
+	"context"
+	"encoding/json"
 	"fmt"
-    "net/http"
+	"log"
+	"net/http"
+	"os"
+
+	openai "github.com/sashabaranov/go-openai"
 )
 
-// { what is being sent 
+// { what is being sent
 //   "combo": {
 //     "subject": "אני",
 //     "verb": "ללכת",
@@ -48,6 +52,39 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
     response := map[string]string{
     "feedback": fmt.Sprintf("Sentence received! Looks good. You wrote: %s", req.Sentence),
 }
+	// jsonData, err := json.Marshal(req) //Try to convert the req struct into JSON.
+	if err != nil {
+		log.Fatal(err)
+	}
+	client := openai.NewClient(os.Getenv("OPEN_API_KEY"))
+	systemPrompt := "You are a Hebrew tutor. Evaluate grammar and conjugation only. Also give a naturals sounding similar sentence"
+	userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
+	req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
+
+	resp, err := client.CreateChatCompletion(
+	context.Background(),
+	openai.ChatCompletionRequest{
+		Model: openai.GPT4,
+		Messages: []openai.ChatCompletionMessage{
+			{
+				Role:    openai.ChatMessageRoleSystem,
+				Content: systemPrompt,
+			},
+			{
+				Role:    openai.ChatMessageRoleUser,
+				Content: userPrompt,
+			},
+		},
+	},
+)
+
+	
+	if err != nil {
+		log.Fatalf("OpenAI API error: %v\n", err)
+	}
+	fmt.Println("Feedback from OpenAI:", resp.Choices[0].Message.Content)
+
+
 
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(response)
