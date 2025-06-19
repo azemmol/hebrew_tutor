@@ -64,7 +64,7 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 	resp, err := client.CreateChatCompletion(
 	context.Background(),
 	openai.ChatCompletionRequest{
-		Model: openai.GPT4,
+		Model: openai.GPT4oMini,
 		Messages: []openai.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleSystem,

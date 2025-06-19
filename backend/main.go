@@ -4,7 +4,15 @@ import (
     "net/http"
     "log"
 	"github.com/azemmol/hebrew-tutor/backend/handlers"
+	"github.com/joho/godotenv"
+
 )
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
 
 
 func withCORS(h http.HandlerFunc) http.HandlerFunc {
