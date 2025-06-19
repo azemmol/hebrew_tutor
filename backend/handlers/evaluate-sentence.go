@@ -3,6 +3,7 @@ package handlers
 import (
     "encoding/json"
     "log"
+	"fmt"
     "net/http"
 )
 
@@ -45,8 +46,8 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 
     // Dummy feedback response
     response := map[string]string{
-        "feedback": "Sentence received! Looks good.",
-    }
+    "feedback": fmt.Sprintf("Sentence received! Looks good. You wrote: %s", req.Sentence),
+}
 
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(response)

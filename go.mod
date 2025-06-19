@@ -1,4 +1,4 @@
-module github.com/azemmol/hebrew-tutor/backend
+module github.com/azemmol/hebrew-tutor
 
 go 1.24.4
 
