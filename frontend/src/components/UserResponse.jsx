@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 //r
 function Response({ combo }) {
-    const [response, setResponse] = useState(""); 
-    const [feedback, setFeedback] = useState(""); 
+    const [response, setResponse] = useState("");
+    const [feedback, setFeedback] = useState("");
+
+    useEffect(() => {
+        setResponse("");
+        setFeedback("");
+    }, [combo]);
        const handleSubmission = async (e) => {
         e.preventDefault();
 
@@ -11,7 +16,6 @@ function Response({ combo }) {
             combo,
             sentence: response
         };
-        setResponse("");
         const res = await fetch('http://localhost:8080/api/evaluate-sentence', {
             method: 'POST',
             headers: {
@@ -22,7 +26,7 @@ function Response({ combo }) {
         console.log(sentence_data)
        
 
-        const data = await res.json();
+    const data = await res.json();
         console.log("OpenAI says:", data); 
         setFeedback(data.feedback);
        
