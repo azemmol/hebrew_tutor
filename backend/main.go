@@ -31,13 +31,14 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
     }
 }
 
+
 func main() {
     http.HandleFunc("/api/evaluate-sentence", withCORS(handlers.EvaluateSentenceHandler))
-	log.Println("Server starting on http://localhost:8080...")
-    err := http.ListenAndServe(":8080", nil)
+
+    log.Println("Server starting on http://0.0.0.0:8080...")
+    
+    err := http.ListenAndServe("0.0.0.0:8080", nil)
     if err != nil {
         log.Fatal("Server failed:", err)
     }
-	
-
 }

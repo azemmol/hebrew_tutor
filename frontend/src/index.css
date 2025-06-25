@@ -53,3 +53,14 @@ nav a:hover {
   color:#1b4c7b;
 
 }
+
+.submit_answer {
+   width: 50%;
+  height: 50px;
+  font-size: 18px;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  display: block; /* Ensures it's treated as block-level */
+
+}

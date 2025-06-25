@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-const verbs = ["להשתפר","לעדכן","להצטרף","להתמודד","להעדיף"];
+const verbs = ["להשתפר","לעדכן","להצטרף","להתמודד","להעדיף","לוּכַל"];
 const tenses = ["עבר", "הווה", "עתיד"];
 const subjects = [
   "אני", "אתה", "את", "הוא", "היא", "אנחנו", "אתם", "אתן", "הם", "הן"

@@ -57,7 +57,12 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	client := openai.NewClient(os.Getenv("API_KEY"))
-	systemPrompt := "You are a consice Hebrew tutor. Evaluate grammar and conjugation only.include nekudot when giving feedback on the verb - right or wrong; Also give a naturals sounding similar sentence"
+	// systemPrompt := "You are an expert Hebrew tutor. Evaluate grammar and conjugation. the only word that will be in english is the spelling of the correct verb given the tense. make suggestions to promote natural hebrew and suggest a new verb that is commonly used."
+	systemPrompt := `You are an expert Hebrew tutor. Your task is to evaluate the grammar and verb conjugation in the given sentence. The only word that may appear in English is the transliteration of the correct verb (in its proper tense and form). Always determine if the verb used matches the subject and tense. Then:
+	1. Correct any conjugation or grammatical mistakes.
+	2. Briefly suggest how to make the sentence sound more natural to a native speaker.
+	3. Optionally recommend a more commonly used or appropriate verb when relevant.`
+
 	userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
 	req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
 

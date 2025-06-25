@@ -11,7 +11,7 @@ function Response({ combo }) {
             combo,
             sentence: response
         };
-
+        setResponse("");
         const res = await fetch('http://localhost:8080/api/evaluate-sentence', {
             method: 'POST',
             headers: {
@@ -25,7 +25,8 @@ function Response({ combo }) {
         const data = await res.json();
         console.log("OpenAI says:", data); 
         setFeedback(data.feedback);
-        // setResponse("");
+       
+       // setResponse("");
       
     }
 
@@ -35,6 +36,7 @@ function Response({ combo }) {
             {combo && (
                 <form onSubmit={handleSubmission}>
                     <input
+                        className='submit_answer'
                         type="text"
                         value={response}
                         onChange={(e) => setResponse(e.target.value)}
