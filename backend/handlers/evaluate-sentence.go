@@ -61,7 +61,7 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 	systemPrompt := `You are an expert Hebrew tutor. Your task is to evaluate the grammar and verb conjugation in the given sentence. The only word that may appear in English is the transliteration of the correct verb (in its proper tense and form). Always determine if the verb used matches the subject and tense. Then:
 	1. Correct any conjugation or grammatical mistakes.
 	2. Briefly suggest how to make the sentence sound more natural to a native speaker.
-	3. Optionally recommend a more commonly used or appropriate verb when relevant.`
+	3. provide another natural sounding sentence with the verb.`
 
 	userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
 	req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
