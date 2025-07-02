@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS verbs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hebrew TEXT NOT NULL,
+    english TEXT NOT NULL,
+    binyan TEXT,
+);
