@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import StartVerb from "../components/StartVerb.jsx";
 import Response from '../components/UserResponse.jsx'; 
-
+import AddVerb from '../components/VerbForm.jsx';
 
 const verbs = ["להשתפר","לעדכן","להצטרף","להתמודד","להעדיף"]
 const tense = ["עבר", "הווה", "עתיד"]
@@ -37,10 +37,10 @@ function Playground() {
      <StartVerb combo={combo} setCombo={setCombo} />
      <Response combo={combo} />
 
-       
+    <AddVerb></AddVerb>
+
 
      </div>
-    
     
     )
 
