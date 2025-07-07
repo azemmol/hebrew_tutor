@@ -67,6 +67,8 @@ func main() {
 
     // 4. Setup HTTP routes
     http.HandleFunc("/api/evaluate-sentence", withCORS(handlers.EvaluateSentenceHandler))
+    http.HandleFunc("/api/add-verb", withCORS(handlers.AddVerbHandler))
+
 
     // 5. Start server (this blocks)
     log.Println("Server starting on http://0.0.0.0:8080...")

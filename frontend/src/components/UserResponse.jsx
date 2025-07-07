@@ -18,7 +18,7 @@ function Response({ combo }) {
         };
         const res = await fetch('http://localhost:8080/api/evaluate-sentence', {
             method: 'POST',
-            headers: {
+            header: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(sentence_data)

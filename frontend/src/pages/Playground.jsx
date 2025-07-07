@@ -36,7 +36,7 @@ function Playground() {
      
      <StartVerb combo={combo} setCombo={setCombo} />
      <Response combo={combo} />
-
+    <br></br>
     <AddVerb></AddVerb>
 
 
