@@ -2,6 +2,7 @@ package main
 
 import (
     "net/http"
+     _ "embed"
     "log"
 	"github.com/azemmol/hebrew-tutor/backend/handlers"
     "github.com/azemmol/hebrew-tutor/backend/config"
@@ -34,10 +35,12 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
         h.ServeHTTP(w, r)
     }
 }
-
-
+//go:embed schema/schema.sql
+var schemaSQL string
 func main() {
-    config.InitDB("verbs.db")
+    config.InitDB("verbs.db", schemaSQL)
+
+    // config.InitDB("verbs.db")
     // 2. Insert test verb
    
    
