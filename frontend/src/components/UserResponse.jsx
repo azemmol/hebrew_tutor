@@ -16,7 +16,8 @@ function Response({ combo }) {
             combo,
             sentence: response
         };
-        const res = await fetch('http://localhost:8080/api/evaluate-sentence', {
+        await fetch('https://hebrew-tutor.onrender.com/api/evaluate-sentence', {
+        //const res = await fetch('http://localhost:8080/api/evaluate-sentence', {
             method: 'POST',
             header: {
                 'Content-Type': 'application/json'
