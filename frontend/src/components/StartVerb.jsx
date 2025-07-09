@@ -12,7 +12,8 @@ function StartVerb({ combo, setCombo, }) {
     };
     return (
         <div>
-            <button onClick={handleClick}>Start</button>
+
+            <button className="primary-button" onClick={handleClick}>Start</button>
 
                {combo && (
                 <div className='building_blocks'>

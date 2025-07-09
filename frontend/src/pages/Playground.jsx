@@ -24,14 +24,13 @@ function Playground() {
 
     return (
 
-    <div>
+    <div className="container">
         <h1 className='playground_header'> Welcome to Playground!</h1>
         <br></br> <br></br>
         <div className="playground_header_2">
-            <p>Click "Start" to receive a sentence prompt. Your answer will be checked for accuracy.</p>
 
         </div>
-        <h4 className='playground_header_2'> מוכן, press start</h4>
+        <h4 className='playground_header_2'> מוכן? press start to receive a prompt</h4>
       
      
      <StartVerb combo={combo} setCombo={setCombo} />

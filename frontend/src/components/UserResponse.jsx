@@ -16,8 +16,10 @@ function Response({ combo }) {
             combo,
             sentence: response
         };
+        //prod
         const res = await fetch('https://hebrew-tutor.onrender.com/api/evaluate-sentence', {
-        //const res = await fetch('http://localhost:8080/api/evaluate-sentence', {
+        //local
+        // const res = await fetch('http://localhost:8080/api/evaluate-sentence', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,28 +42,52 @@ function Response({ combo }) {
         <div>
             {combo && (
                 <form onSubmit={handleSubmission}>
-                    <input
+                    <textarea
+                        className='submit_answer'
+                        value={response}
+                        onChange={(e) => setResponse(e.target.value)}
+                        placeholder='לכתוב פה'
+                        rows={2}
+/>
+                    {/* <input
                         className='submit_answer'
                         type="text"
                         value={response}
                         onChange={(e) => setResponse(e.target.value)}
                         placeholder='Type your sentence'
-                    />
-                    <button type='submit'>Submit!</button>
+                    /> */}
+                    <button className="primary-button" type='submit'>Submit!</button>
+
+                    {/* <button type='submit'>Submit!</button> */}
                 </form>
             )}
 
             {feedback && (
-                <div style={{
+                <pre style={{
                     border: '1px solid #ccc',
                     padding: '12px',
                     marginTop: '16px',
                     borderRadius: '8px',
-                    backgroundColor: '#f9f9f9'
-                }}>
-                    <strong>OpenAI Feedback:</strong>
-                    <p>{feedback}</p>
-                </div>
+                    backgroundColor: '#f9f9f9',
+                    whiteSpace: 'pre-wrap',
+                    fontFamily: 'inherit'
+                    }}>
+                    <strong>AI Feedback:</strong>
+                    <div style={{ marginTop: '8px' }}>
+                    {feedback}
+                    </div>
+                    </pre>
+
+                // <div style={{
+                //     border: '1px solid #ccc',
+                //     padding: '12px',
+                //     marginTop: '16px',
+                //     borderRadius: '8px',
+                //     backgroundColor: '#f9f9f9'
+                // }}>
+                //     <strong>OpenAI Feedback:</strong>
+                //     <p>{feedback}</p>
+                // </div>
             )}
         </div>
     );

@@ -64,3 +64,42 @@ nav a:hover {
   display: block; /* Ensures it's treated as block-level */
 
 }
+/* .container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+} */
+
+.primary-button {
+  background-color: #6aafee;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background-color 0.3s;
+}
+
+.primary-button:hover {
+  background-color: #339af0;
+}
+
+.submit_answer {
+  width: 42%;
+  font-size: 18px;
+  padding: 8px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #339af0;;
+  resize: vertical; /* user can resize it */
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+

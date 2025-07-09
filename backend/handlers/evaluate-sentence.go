@@ -57,11 +57,28 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	client := openai.NewClient(os.Getenv("API_KEY"))
-	// systemPrompt := "You are an expert Hebrew tutor. Evaluate grammar and conjugation. the only word that will be in english is the spelling of the correct verb given the tense. make suggestions to promote natural hebrew and suggest a new verb that is commonly used."
-	systemPrompt := `You are an expert Hebrew tutor. Your task is to evaluate the grammar and verb conjugation in the given sentence. The only word that may appear in English is the transliteration of the correct verb (in its proper tense and form). Always determine if the verb used matches the subject and tense. Then:
-	1. Correct any conjugation or grammatical mistakes.
-	2. Briefly suggest how to make the sentence sound more natural to a native speaker.
-	3. provide another natural sounding sentence with the verb.`
+
+
+	systemPrompt := fmt.Sprintf(`You are a native-level Hebrew tutor specializing in verb conjugation.
+	Your job is to strictly evaluate whether the verb in the student's sentence is correctly conjugated for the given subject and tense.
+	Always follow this 4-part format exactly, with each point starting on a new line and clearly numbered:
+
+	1. 🔍 **Conjugation Check**: Say whether the verb is correctly conjugated for:
+	- Subject: %s
+	- Verb: %s
+	- Tense: %s
+	2. ✅ **Correction** (if needed): Provide the correct sentence using proper conjugation.
+	3. 💡 **Natural Improvement**: Suggest a more natural-sounding version of the sentence, keeping the same meaning.
+	4. ✨ **Extra Example**: Give another fluent, natural sentence using the same verb in any appropriate context.
+	All content (including corrections and examples) should be written in Hebrew. Only use English for brief verb transliteration if absolutely necessary.`,
+    req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
+
+
+
+	// systemPrompt := `You are an expert Hebrew tutor. Your task is to evaluate the grammar and verb conjugation in the given sentence. The only word that may appear in English is the transliteration of the correct verb (in its proper tense and form). Always determine if the verb used matches the subject and tense. Then:
+	// 1. Correct any conjugation or grammatical mistakes.
+	// 2. Briefly suggest how to make the sentence sound more natural to a native speaker.
+	// 3. provide another natural sounding sentence with the verb.`
 
 	userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
 	req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)

@@ -24,6 +24,7 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         // w.Header().Set("Access-Control-Allow-Origin", "*")
 
+        //when deployed uncomment below
         w.Header().Set("Access-Control-Allow-Origin", "https://hebrew-tutor.vercel.app")
         w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
