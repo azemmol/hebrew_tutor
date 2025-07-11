@@ -74,6 +74,8 @@ func main() {
     http.HandleFunc("/api/evaluate-sentence", withCORS(handlers.EvaluateSentenceHandler))
     http.HandleFunc("/api/add-verb", withCORS(handlers.AddVerbHandler))
     http.HandleFunc("/api/view-dictionary", withCORS(handlers.GetAllVerbsHandler))
+    http.HandleFunc("/api/get-verb", withCORS(handlers.GetVerb))
+
 
 
 

@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import getRandomVerbCombo from './Randomizer.js';
+// import getRandomVerbCombo from './Randomizer.js';
+import { getRandomVerbCombo } from './Randomizer.js';
+
 
 
 function StartVerb({ combo, setCombo, }) {
     
-    const handleClick = () => {
-        const combo_chadash = getRandomVerbCombo();
-        setCombo(combo_chadash);
-    
-    };
+   const handleClick = async () => {
+    const combo_chadash = await getRandomVerbCombo();
+    setCombo(combo_chadash);
+  };
     return (
         <div>
 
