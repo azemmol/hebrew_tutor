@@ -12,6 +12,7 @@ function Navbar() {
 
             <ul style={{ display: 'flex', listStyle: 'none',  }}>
                 <li><NavLink to="/playground">Playground</NavLink></li>
+                <li><NavLink to="/add-to-dictionary">Add To Dictionary</NavLink></li>
                 <li><NavLink to="/about">About Us</NavLink></li>
             </ul>
         </nav>

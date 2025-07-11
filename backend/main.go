@@ -22,10 +22,10 @@ func init() {
 
 func withCORS(h http.HandlerFunc) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-        // w.Header().Set("Access-Control-Allow-Origin", "*")
+        w.Header().Set("Access-Control-Allow-Origin", "*")
 
         //when deployed uncomment below
-        w.Header().Set("Access-Control-Allow-Origin", "https://hebrew-tutor.vercel.app")
+        // w.Header().Set("Access-Control-Allow-Origin", "https://hebrew-tutor.vercel.app")
         w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
@@ -73,6 +73,8 @@ func main() {
     // 4. Setup HTTP routes
     http.HandleFunc("/api/evaluate-sentence", withCORS(handlers.EvaluateSentenceHandler))
     http.HandleFunc("/api/add-verb", withCORS(handlers.AddVerbHandler))
+    http.HandleFunc("/api/view-dictionary", withCORS(handlers.GetAllVerbsHandler))
+
 
 
     // 5. Start server (this blocks)

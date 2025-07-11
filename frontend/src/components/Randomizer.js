@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 const verbs = ["להשתפר","לעדכן","להצטרף","להתמודד","להעדיף"
@@ -12,6 +12,23 @@ const subjects = [
   "שם פועל","שם פועל","שם פועל"
 ];
 function getRandomVerbCombo() {
+  const [real_verb,setVerb] = useState("");
+
+  const api_data = {
+    hebrew_verb:
+    english_verb
+  }
+
+  const res = await fetch('http://localhost:8080/api/get-verb',){
+    method : 'GET',
+    headers: {
+            'Content-Type': 'application/json'
+            },
+    body: JSON.stringify(api_data)
+
+  }
+
+
   const verb_idx = getRandomInteger(0, verbs.length - 1);
   const tense_idx = getRandomInteger(0, tenses.length - 1);
   const subject_idx = getRandomInteger(0, subjects.length - 1);
@@ -27,3 +44,5 @@ function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 export default getRandomVerbCombo;
+
+
