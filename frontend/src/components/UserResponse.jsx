@@ -72,7 +72,7 @@ function Response({ combo }) {
                     whiteSpace: 'pre-wrap',
                     fontFamily: 'inherit'
                     }}>
-                    <strong>AI Feedback:</strong>
+                    <strong>Feedback:</strong>
                     <div style={{ marginTop: '8px' }}>
                     {feedback}
                     </div>

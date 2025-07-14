@@ -29,7 +29,7 @@ const confirmSubmit = async () => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  setShowConfirm(true); // Just show the modal
+  setShowConfirm(true);
 };
 
   return (

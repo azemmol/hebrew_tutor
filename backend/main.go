@@ -38,26 +38,13 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
         h.ServeHTTP(w, r)
     }
 }
-//go:embed schema/schema.sql
-var schemaSQL string
+// var schemaSQL string
 func main() {
-    config.InitDB("verbs.db", schemaSQL)
+    ///good when deploy locally
+    // config.InitDB("verbs.db", schemaSQL)
+    config.InitDB()
 
-    // config.InitDB("verbs.db")
-    // 2. Insert test verb
-   
-   
-    // newVerb := models.Verb{
-    //     Hebrew:  "להצטרף",
-    //     English: "to join",
-    // }
-    // _, err := config.DB.NamedExec(`
-    //     INSERT INTO verbs (hebrew, english) 
-    //     VALUES (:hebrew, :english)
-    // `, newVerb)
-    // if err != nil {
-    //     log.Fatalln("Insert failed:", err)
-    // }
+
     var err error
     // 3. Fetch and print verbs
     var verbs []models.Verb

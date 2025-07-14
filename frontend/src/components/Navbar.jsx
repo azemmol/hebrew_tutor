@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
     return (
-        <nav>
+        <nav> 
              <ul style={{ display: 'flex', listStyle: 'none' }}>
 
        
