@@ -2,40 +2,110 @@ import React, { useEffect, useState } from 'react';
 
 function ViewDictionary() {
   const [verbs, setVerbs] = useState([]);
-  const [dict, showDict] = useState(false)
+  const [showDict, setShowDict] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!dict) return;
+    if (!showDict) return;
+    
     const fetchVerbs = async () => {
-      const res = await fetch('http://localhost:8080/api/view-dictionary');
-      const data = await res.json();
-    console.log("Fetched verbs:", data); // 👈 See what you're actually getting
-
-      setVerbs(data);
+      setIsLoading(true);
+      try {
+        const res = await fetch('http://localhost:8080/api/view-dictionary');
+        const data = await res.json();
+        setVerbs(data);
+      } catch (error) {
+        console.error('Error fetching verbs:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
+    
     fetchVerbs();
-  }, [dict]); // only runs when value of dict changes
-
+  }, [showDict]);
 
   return (
-    <div className="container-flex">
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
-        onClick={() => showDict(true)}
-      >
-        View Dictionary
-      </button>
+    <div>
+      <h3 style={{ color: '#2d3748', marginBottom: '1.5rem', textAlign: 'center' }}>
+        📖 Your Dictionary
+      </h3>
+      
+      <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+        <button
+          className="primary-button"
+          onClick={() => setShowDict(!showDict)}
+          style={{ 
+            background: showDict ? '#e53e3e' : 'linear-gradient(135deg, #667eea, #764ba2)'
+          }}
+        >
+          {showDict ? '🔒 Hide Dictionary' : '📚 View Dictionary'}
+        </button>
+      </div>
 
-      {dict && (
-        <div className="verb_dict">
-          <h2 className="text-2xl font-bold mb-4">Verb Dictionary</h2>
-          <ul className="space-y-2">
-            {verbs.map((verb) => (
-              <li key={verb.id} className="border p-2 rounded">
-                <strong>{verb.Hebrew}</strong> – {verb.English}
-              </li>
-            ))}
-          </ul>
+      {showDict && (
+        <div className="fade-in">
+          {isLoading ? (
+            <div style={{ textAlign: 'center', padding: '2rem' }}>
+              <p style={{ color: '#4a5568' }}>⏳ Loading your dictionary...</p>
+            </div>
+          ) : verbs.length > 0 ? (
+            <div>
+              <h4 style={{ 
+                color: '#2d3748', 
+                marginBottom: '1rem',
+                textAlign: 'center',
+                fontSize: '1.1rem'
+              }}>
+                📝 Your Verbs ({verbs.length})
+              </h4>
+              <div style={{ 
+                maxHeight: '300px', 
+                overflowY: 'auto',
+                border: '1px solid #e2e8f0',
+                borderRadius: '8px',
+                padding: '1rem'
+              }}>
+                {verbs.map((verb) => (
+                  <div 
+                    key={verb.id} 
+                    style={{
+                      padding: '0.75rem',
+                      margin: '0.5rem 0',
+                      background: 'rgba(255, 255, 255, 0.8)',
+                      borderRadius: '8px',
+                      border: '1px solid #e2e8f0',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <span style={{ 
+                      direction: 'rtl', 
+                      fontWeight: '600',
+                      color: '#2d3748',
+                      fontSize: '1.1rem'
+                    }}>
+                      {verb.Hebrew}
+                    </span>
+                    <span style={{ color: '#4a5568' }}>
+                      {verb.English}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '2rem',
+              color: '#4a5568'
+            }}>
+              <p>📭 Your dictionary is empty</p>
+              <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                Add some verbs to get started!
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

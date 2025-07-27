@@ -21,10 +21,19 @@ func AddVerbHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Invalid JSON", http.StatusBadRequest)
         return
     }
+	// _, err = config.DB.NamedExec(`
+	// 	INSERT INTO verbs (hebrew, english) 
+	// 	VALUES (:hebrew, :english)
+	// `, verb_data)
+
 	_, err = config.DB.NamedExec(`
-		INSERT INTO verbs (hebrew, english) 
-		VALUES (:hebrew, :english)
-	`, verb_data)
+	INSERT INTO verbs (hebrew, english) 
+	VALUES (:hebrew, :english)
+	`, map[string]interface{}{
+		"hebrew": verb_data.Hebrew,
+		"english": verb_data.English,
+	})
+
 
 	if err != nil {
 		log.Printf("Insert failed: %v", err)

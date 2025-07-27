@@ -59,20 +59,25 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 	client := openai.NewClient(os.Getenv("API_KEY"))
 
 
-	systemPrompt := fmt.Sprintf(`You are a native-level Hebrew tutor specializing in verb conjugation.
-	Your job is to strictly evaluate whether the verb in the student's sentence is correctly conjugated for the given subject and tense.
-	Always follow this 4-part format exactly, with each point starting on a new line and clearly numbered:
+	systemPrompt := `You are a native-level Hebrew tutor specializing in verb conjugation.
+	Your task is to strictly evaluate whether the verb in the student's sentence is correctly conjugated for the given subject and tense.
+	Always follow this 4-part format exactly. Each point must start on a new line and be clearly numbered:
+	1. 🔍 **Conjugation Check**:  
+	Evaluate whether the verb in the student's sentence is correctly conjugated for the intended subject and tense.  
+	- Clearly state whether the verb is correct or incorrect.  
+	- If incorrect, provide the correct conjugated form only — no full sentence needed.  
+	- Be concise and specific.
 
-	1. 🔍 **Conjugation Check**: Say whether the verb is correctly conjugated for:
-	- Subject: %s
-	- Verb: %s
-	- Tense: %s
-	2. ✅ **Correction** (if needed): Provide the correct sentence using proper conjugation.
-	3. 💡 **Natural Improvement**: Suggest a more natural-sounding version of the sentence, keeping the same meaning.
-	4. ✨ **Extra Example**: Give another fluent, natural sentence using the same verb in any appropriate context.
-	All content (including corrections and examples) should be written in Hebrew. Only use English for brief verb transliteration if absolutely necessary.`,
-    req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
+	2. ✅ **Correction & Enhancement**:  
+	Provide a fully corrected and idiomatic version of the sentence. Focus on fluency and natural usage.
 
+	3. ✨ **Extra Examples*:  
+	Give 2 fluent, slightly longer natural Hebrew sentence using the same verb in a different context. The first intermediate, the second advanced sounding fluent hebrew adding advanced common vocabulary
+
+	4. 🏅 **Rating**:  
+	Score the original sentence out of 10 based on fluency, natural phrasing, and conjugation accuracy. Use decimals only (e.g., 8.5). No explanation.
+
+	All content should be written in Hebrew. Use English only for brief transliteration if absolutely necessary.`
 
 
 	// systemPrompt := `You are an expert Hebrew tutor. Your task is to evaluate the grammar and verb conjugation in the given sentence. The only word that may appear in English is the transliteration of the correct verb (in its proper tense and form). Always determine if the verb used matches the subject and tense. Then:
@@ -80,8 +85,16 @@ func EvaluateSentenceHandler(w http.ResponseWriter, r *http.Request) {
 	// 2. Briefly suggest how to make the sentence sound more natural to a native speaker.
 	// 3. provide another natural sounding sentence with the verb.`
 
-	userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
-	req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
+	// userPrompt := fmt.Sprintf("Evaluate this sentence: %s. Subject: %s, Verb: %s, Tense: %s",
+	// req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
+
+	userPrompt := fmt.Sprintf(`
+		Student's Sentence: "%s"
+		- Subject: %s
+		- Verb (infinitive): %s
+		- Tense: %s
+	`, req.Sentence, req.Combo.Subject, req.Combo.Verb, req.Combo.Tense)
+
 
 	resp, err := client.CreateChatCompletion(
 	context.Background(),
