@@ -2,8 +2,8 @@ FROM golang:1.24-alpine
 
 WORKDIR /app
 
-# Copy go mod files first for better caching
-COPY backend/go.mod backend/go.sum ./
+# Copy go mod files from root directory
+COPY go.mod go.sum ./
 
 # Download dependencies
 RUN go mod download

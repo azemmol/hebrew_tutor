@@ -6,4 +6,5 @@ README.md
 node_modules
 frontend/
 backend/.env
-backend/*.db 
+backend/*.db
+backend/.DS_Store 
