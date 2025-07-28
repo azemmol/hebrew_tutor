@@ -1,9 +1,9 @@
 [build]
 builder = "nixpacks"
-watchPatterns = ["backend/**/*"]
+sourceDirectory = "backend"
 
 [deploy]
-startCommand = "cd backend && go run main.go"
+startCommand = "go run main.go"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure" 
