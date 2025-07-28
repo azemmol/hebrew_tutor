@@ -2,14 +2,11 @@ FROM golang:1.24-alpine
 
 WORKDIR /app
 
-# Copy go mod files from backend
-COPY backend/go.mod backend/go.sum ./
+# Copy the entire backend directory
+COPY backend/ .
 
 # Download dependencies
 RUN go mod download
-
-# Copy backend source code
-COPY backend/ .
 
 # Build the application
 RUN go build -o main .

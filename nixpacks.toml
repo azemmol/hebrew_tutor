@@ -2,10 +2,10 @@
 nixPkgs = ["go"]
 
 [phases.install]
-cmds = ["cd backend && go mod download"]
+cmds = ["go mod download"]
 
 [phases.build]
-cmds = ["cd backend && go build -o main ."]
+cmds = ["go build -o main ."]
 
 [start]
-cmd = "cd backend && ./main" 
+cmd = "./main" 
