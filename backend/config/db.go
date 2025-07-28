@@ -1,5 +1,24 @@
 package config
 
+// import (
+//     "log"
+
+//     "github.com/jmoiron/sqlx"
+//     _ "github.com/mattn/go-sqlite3"
+// )
+
+// var DB *sqlx.DB
+
+// func InitDB(path string, schema string) {
+//     var err error
+//     DB, err = sqlx.Open("sqlite3", path)
+//     if err != nil {
+//         log.Fatalln("Failed to connect to DB:", err)
+//     }
+
+//     DB.MustExec(schema)
+// }
+
 import (
 	"fmt"
 	"log"
@@ -12,22 +31,16 @@ import (
 var DB *sqlx.DB
 
 func InitDB() {
-	// Check for Railway's PostgreSQL URL first
-	databaseURL := os.Getenv("DATABASE_URL")
-	if databaseURL == "" {
-		// Fallback to Supabase connection
-		pw := os.Getenv("DB_PW")
-		if pw == "" {
-			log.Fatal("DATABASE_URL or DB_PW environment variable not set")
-		}
-		databaseURL = fmt.Sprintf("postgresql://postgres:%s@db.xunjtjuxfgljithtmjpi.supabase.co:5432/postgres?sslmode=require", pw)
+	pw := os.Getenv("DB_PW") // Load DB password from env variable
+	if pw == "" {
+		log.Fatal("DB_PW environment variable not set")
 	}
+
+	dsn := fmt.Sprintf("postgres://postgres:%s@db.xunjtjuxfgljithtmjpi.supabase.co:5432/postgres", pw)
 
 	var err error
-	DB, err = sqlx.Connect("postgres", databaseURL)
+	DB, err = sqlx.Connect("postgres", dsn)
 	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
+		log.Fatalf("Failed to connect to Supabase DB: %v", err)
 	}
-
-	log.Println("Successfully connected to database")
 }
